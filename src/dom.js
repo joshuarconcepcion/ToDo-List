@@ -14,3 +14,13 @@ export function renderUI() {
     const formattedDate = format(today, 'PPPP');
     dateDisplay.textContent = formattedDate;
 }
+
+export function renderProjectList(projects, container) {
+    projects.forEach(project => {
+        const button = document.createElement('button');
+        button.classList.add('project-btn');
+        button.textContent = project.name;
+
+        container.appendChild(button);
+    })
+}
