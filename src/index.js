@@ -1,10 +1,10 @@
 import './style.css';
 import { renderUI, renderProjectList } from './dom.js';
-import { createProject } from './createAndSaveProject.js';
+import { createProject } from './createProjects.js';
 import { loadProjects } from './projectStorage.js'
 
 const addProjectBtn = document.getElementById('add-project-btn');
-const deleteProjectBtn = document.querySelectorAll('delete-project-btn');
+const deleteProjectBtn = document.querySelectorAll('.delete-project-btn');
 const projectList = document.querySelector('.project-list');
 let projects = loadProjects();
 
@@ -12,13 +12,13 @@ renderUI();
 renderProjectList(projects, projectList);
 
 addProjectBtn.addEventListener('click', () => {
-    createProject();
+    createProject(projects, projectList);
 });
 
 document.querySelector('.project-list').addEventListener('click', (e) => {
     if (e.target.classList.contains('delete-project-btn')) {
         const container = e.target.closest('.project-container');
-        const projectBtn = document.querySelector('.project-btn');
+        const projectBtn = container.querySelector('.project-btn');
 
         const projectName = projectBtn.textContent;
 
@@ -26,6 +26,8 @@ document.querySelector('.project-list').addEventListener('click', (e) => {
 
         localStorage.setItem('projects', JSON.stringify(projects));
 
-        if (container) container.remove();
+        if (container) {
+            container.remove();
+        }
     }
 });
