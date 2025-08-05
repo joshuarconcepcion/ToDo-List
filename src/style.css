@@ -50,6 +50,7 @@ main {
 .sidebar-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 80%;
     gap: 1rem;
 }
@@ -79,6 +80,24 @@ main {
     height: 3rem;
 }
 
+.project-container {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+#default-project {
+    width: 100%;
+}
+
+.project-btn {
+    width: 75%;
+}
+
+.delete-project-btn {
+    width: 25%;
+}
+
 /* === BUTTONS === */
 
 button {
@@ -94,8 +113,9 @@ button {
 }
 
 button:hover {
-  background-color: #f0f0f0;
+  background-color: #4569dc;
   cursor: pointer;
+  transform: scale(1.01);
 }
 
 /* === MAIN === */

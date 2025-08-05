@@ -7,8 +7,3 @@ export function loadProjects() {
     return data ? JSON.parse(data) : [];
 }
 
-export const createAndSaveProject = (projectName) => {
-    const newProject = { name: projectName };
-    projects.push(newProject);
-    saveProjects(projects);
-}

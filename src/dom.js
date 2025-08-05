@@ -17,10 +17,19 @@ export function renderUI() {
 
 export function renderProjectList(projects, container) {
     projects.forEach(project => {
-        const button = document.createElement('button');
-        button.classList.add('project-btn');
-        button.textContent = project.name;
+        const projectContainer = document.createElement('div');
+        projectContainer.classList.add('project-container');
+        
+        const projectBtn = document.createElement('button');
+        projectBtn.classList.add('project-btn');
+        projectBtn.textContent = project.name;
 
-        container.appendChild(button);
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-project-btn');
+        deleteBtn.textContent = 'Delete';
+
+        container.appendChild(projectContainer);
+        projectContainer.appendChild(projectBtn);
+        projectContainer.appendChild(deleteBtn);
     })
 }

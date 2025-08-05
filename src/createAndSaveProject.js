@@ -1,4 +1,4 @@
-import { saveProjects, loadProjects, createAndSaveProject } from './projectStorage.js';
+import { saveProjects, loadProjects } from './projectStorage.js';
 
 const projectList = document.querySelector('.project-list');
 
@@ -17,10 +17,17 @@ export function createProject() {
     projectInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             const projectName = projectInput.value;
+            const newProjectContainer = document.createElement('div');
+            newProjectContainer.classList.add('project-container');
             const newProject = document.createElement('button');
             newProject.textContent = projectName;
             newProject.classList.add('project-btn');
-            projectList.appendChild(newProject);
+            const deleteProjectBtn = document.createElement('button');
+            deleteProjectBtn.classList.add('delete-project-btn');
+            deleteProjectBtn.textContent = 'Delete';
+            newProjectContainer.appendChild(newProject);
+            newProjectContainer.appendChild(deleteProjectBtn);
+            projectList.appendChild(newProjectContainer);
 
             createAndSaveProject(projectName);
 
@@ -29,4 +36,10 @@ export function createProject() {
         }
     });
     
+}
+
+const createAndSaveProject = (projectName) => {
+    const newProject = { name: projectName };
+    projects.push(newProject);
+    saveProjects(projects);
 }
