@@ -1,4 +1,4 @@
-import todayLogo from './media/images/todayLogo.png';
+import todayLogo from './media/images/todayLogo3.png';
 import { format } from 'date-fns';
 
 const sidebarLogoContainer = document.querySelector('.sidebar-logo-container');
@@ -36,4 +36,28 @@ export function renderSingleProject(project, container) {
     container.appendChild(projectContainer);
     projectContainer.appendChild(projectBtn);
     projectContainer.appendChild(deleteBtn);
+}
+
+export function renderSingleTodo(container) {
+    const todoItemContainer = document.createElement('div');
+    todoItemContainer.classList.add('todo-item-container');
+
+    const todoBtn = document.createElement('button');
+    todoBtn.classList.add('todo-btn');
+
+    const deleteTodoBtn = document.createElement('button');
+    deleteTodoBtn.classList.add('delete-todo-btn');
+    deleteTodoBtn.textContent = 'X'
+
+    const todoBtnLeft = document.createElement('div');
+    todoBtnLeft.classList.add('todo-btn-left');
+
+    const todoBtnRight = document.createElement('div');
+    todoBtnRight.classList.add('todo-btn-right');
+
+    todoBtn.appendChild(todoBtnLeft);
+    todoBtn.appendChild(todoBtnRight);
+    todoItemContainer.appendChild(todoBtn);
+    todoItemContainer.appendChild(deleteTodoBtn);
+    container.appendChild(todoItemContainer);
 }
