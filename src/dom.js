@@ -21,6 +21,18 @@ export function renderProjectList(projects, container) {
     })
 }
 
+export function renderProjectInput(container) {
+    const projectInput = document.createElement('input');
+    projectInput.id = 'project-input';
+    projectInput.type = 'text';
+    projectInput.placeholder = 'Project name...'
+    projectInput.style.display = 'block';
+    container.appendChild(projectInput);
+
+    projectInput.focus();
+    return projectInput;
+}
+
 export function renderSingleProject(project, container) {
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('project-container');
@@ -36,6 +48,39 @@ export function renderSingleProject(project, container) {
     container.appendChild(projectContainer);
     projectContainer.appendChild(projectBtn);
     projectContainer.appendChild(deleteBtn);
+}
+
+export function renderTodoInput(container) {
+    const todoCheckInput = document.createElement('input');
+    todoCheckInput.type = 'checkbox';
+    todoCheckInput.classList.add('todo-check-input');
+    todoCheckInput.style.display = 'block';
+
+    const todoTitleInput = document.createElement('input');
+    todoTitleInput.type = 'text';
+    todoTitleInput.classList.add('todo-title-input');
+    todoTitleInput.placeholder = 'Todo name...';
+    todoTitleInput.style.display = 'block';
+
+    const todoDescriptionInput = document.createElement('input');
+    todoDescriptionInput.type = 'text';
+    todoDescriptionInput.classList.add('todo-description-input');
+    todoDescriptionInput.placeholder = 'Description...';
+    todoDescriptionInput.style.display = 'block';
+
+    const todoDateInput = document.createElement('input');
+    todoDateInput.type = 'date';
+    todoDateInput.classList.add('todo-date-input');
+    todoDateInput.valueAsDate = new Date();
+    todoTitleInput.style.display = 'block';
+
+    container.appendChild(todoCheckInput);
+    container.appendChild(todoTitleInput);
+    container.appendChild(todoDescriptionInput);
+    container.appendChild(todoDateInput);
+
+    todoTitleInput.focus();
+    return todoTitleInput;
 }
 
 export function renderSingleTodo(container) {
@@ -61,3 +106,4 @@ export function renderSingleTodo(container) {
     todoItemContainer.appendChild(deleteTodoBtn);
     container.appendChild(todoItemContainer);
 }
+

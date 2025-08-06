@@ -1,15 +1,9 @@
 import { saveProjects } from './projectStorage.js';
 import { renderSingleProject } from './dom.js';
+import { renderProjectInput } from './dom.js';
 
 export function createProject(projects, projectList) {
-    const projectInput = document.createElement('input');
-    projectInput.id = 'project-input';
-    projectInput.type = 'text';
-    projectInput.placeholder = 'Project name...'
-    projectInput.style.display = 'block';
-    projectList.appendChild(projectInput);
-
-    projectInput.focus();
+    const projectInput = renderProjectInput(projectList);
 
     projectInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
