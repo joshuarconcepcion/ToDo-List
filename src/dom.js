@@ -51,22 +51,11 @@ export function renderSingleProject(project, container) {
 }
 
 export function renderTodoInput(container) {
-    const todoCheckInput = document.createElement('input');
-    todoCheckInput.type = 'checkbox';
-    todoCheckInput.classList.add('todo-check-input');
-    todoCheckInput.style.display = 'block';
-
     const todoTitleInput = document.createElement('input');
     todoTitleInput.type = 'text';
     todoTitleInput.classList.add('todo-title-input');
     todoTitleInput.placeholder = 'Todo name...';
     todoTitleInput.style.display = 'block';
-
-    const todoDescriptionInput = document.createElement('input');
-    todoDescriptionInput.type = 'text';
-    todoDescriptionInput.classList.add('todo-description-input');
-    todoDescriptionInput.placeholder = 'Description...';
-    todoDescriptionInput.style.display = 'block';
 
     const todoDateInput = document.createElement('input');
     todoDateInput.type = 'date';
@@ -74,16 +63,27 @@ export function renderTodoInput(container) {
     todoDateInput.valueAsDate = new Date();
     todoTitleInput.style.display = 'block';
 
-    container.appendChild(todoCheckInput);
     container.appendChild(todoTitleInput);
-    container.appendChild(todoDescriptionInput);
     container.appendChild(todoDateInput);
 
     todoTitleInput.focus();
-    return todoTitleInput;
+    return {
+        title: todoTitleInput, 
+        date: todoDateInput
+    }
 }
 
-export function renderSingleTodo(container) {
+export function renderSingleTodo(todo, container) {
+    const todoCheckbox = document.createElement('input');
+    todoCheckbox.type = 'checkbox';
+    todoCheckbox.classList.add('todo-checkbox');
+    todoCheckbox.style.display = 'block';
+
+    todoCheckbox.addEventListener('change', () => {
+        todo.toggleComplete();
+        //console.log('Checkbox toggled');
+    })
+
     const todoItemContainer = document.createElement('div');
     todoItemContainer.classList.add('todo-item-container');
 
@@ -94,16 +94,21 @@ export function renderSingleTodo(container) {
     deleteTodoBtn.classList.add('delete-todo-btn');
     deleteTodoBtn.textContent = 'X'
 
-    const todoBtnLeft = document.createElement('div');
-    todoBtnLeft.classList.add('todo-btn-left');
+    const todoBtnTitle = document.createElement('p');
+    todoBtnTitle.classList.add('todo-btn-title');
+    todoBtnTitle.textContent = todo.title;
 
-    const todoBtnRight = document.createElement('div');
-    todoBtnRight.classList.add('todo-btn-right');
+    const todoBtnDate = document.createElement('p');
+    todoBtnDate.classList.add('todo-btn-date')
+    todoBtnDate.textContent = todo.dueDate;
 
-    todoBtn.appendChild(todoBtnLeft);
-    todoBtn.appendChild(todoBtnRight);
+    todoBtn.appendChild(todoBtnTitle);
+    todoBtn.appendChild(todoBtnDate);
+
+    todoItemContainer.appendChild(todoCheckbox)
     todoItemContainer.appendChild(todoBtn);
     todoItemContainer.appendChild(deleteTodoBtn);
+
     container.appendChild(todoItemContainer);
 }
 

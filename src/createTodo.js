@@ -3,11 +3,31 @@ import { renderSingleTodo, renderTodoInput } from "./dom";
 
 const todoList = document.querySelector('.todo-list')
 
-export function createTodo(title, dueDate, description) {
+export function createTodo() {
     const todoItemContainer = document.createElement('div');
     todoItemContainer.classList.add('todo-item-container');
     todoList.append(todoItemContainer);
-    
-    renderTodoInput(todoItemContainer);
-    //renderSingleTodo(todoList);
+
+    const todoInput = renderTodoInput(todoItemContainer);
+
+    const confirmTodo = document.createElement('button');
+    confirmTodo.classList.add('confirm-todo-btn');
+    confirmTodo.textContent = '✓'
+    todoItemContainer.appendChild(confirmTodo);
+
+    confirmTodo.addEventListener('click', () => {
+        const todoTitle = todoInput.title.value.trim();
+        const todoDate = todoInput.date.value;
+        if (todoTitle === '') return;
+
+        const todoObject = new Todo(todoTitle, todoDate);
+
+        renderSingleTodo(todoObject, todoList);
+
+        todoInput.title.value = '';
+        todoInput.date.value = '';
+
+        todoItemContainer.remove();
+    });
+
 }

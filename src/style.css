@@ -117,24 +117,22 @@ main {
 /* === BUTTONS === */
 
 button {
-    all: unset;
-    box-sizing: border-box;
+    background: none;
     border: 2px solid black;
     border-radius: 10px;
-    width: 100%;
-    height: 3rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    font: inherit;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.5rem;
+    width: 100%;
+    height: auto;
 }
 
 button:hover {
-    box-sizing: border-box;
-    cursor: pointer;
-    border: 2px solid black;
     box-shadow: 0 2px 0 black;
-    padding: 1.5rem;
 }
 
 /* === MAIN === */
@@ -159,12 +157,17 @@ button:hover {
 .todo-item-container {
     width: 100%;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
 }
 
 .todo-btn {
-    width: 95%
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
 }
 
 .delete-todo-btn {
@@ -177,21 +180,11 @@ button:hover {
     padding-left: 1rem;
     border: 2px solid black;
     border-radius: 10px;
-    width: 100%;
+    width: 60%;
     height: 3rem;
 }
 
-.todo-description-input {
-    all: unset;
-    box-sizing: border-box;
-    padding-left: 1rem;
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 100%;
-    height: 3rem;
-}
-
-.todo-check-input {
+.todo-checkbox {
     all: unset;
     height: 60px;
     aspect-ratio: 1 / 1;
@@ -201,7 +194,7 @@ button:hover {
     cursor: pointer;
 }
 
-.todo-check-input:checked {
+.todo-checkbox:checked {
     all: unset;
     height: 60px;
     aspect-ratio: 1 / 1;
@@ -213,7 +206,21 @@ button:hover {
 
 .todo-date-input {
     all: unset;
+    width: 30%;
     border: 2px solid black;
     border-radius: 10px;
     padding: 0.8rem;
+}
+
+.todo-btn-title {
+    font-size: 1.5rem;
+}
+
+.todo-btn-date {
+    color: #4569dc;
+}
+
+.confirm-todo-btn {
+    width: 10%;
+    height: auto;
 }
