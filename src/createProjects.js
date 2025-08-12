@@ -1,6 +1,7 @@
 import { saveProjects } from './projectStorage.js';
 import { renderSingleProject } from './dom.js';
 import { renderProjectInput } from './dom.js';
+import { Project } from './project.js';
 
 export function createProject(projects, projectList) {
     const projectInput = renderProjectInput(projectList);
@@ -10,7 +11,8 @@ export function createProject(projects, projectList) {
             const projectName = projectInput.value.trim();
             if (projectName === '') return;
 
-            const projectObject = { name: projectName };
+            const projectObject = new Project(projectName);
+
             projects.push(projectObject);
             saveProjects(projects);
 

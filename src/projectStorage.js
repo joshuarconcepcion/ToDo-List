@@ -7,3 +7,8 @@ export function loadProjects() {
     return data ? JSON.parse(data) : [];
 }
 
+export function addTodoToProject(todoObject, projectID, projects) {
+    const project = projects.find(p => p.id === projectID);
+    project.todos.push(todoObject);
+}
+

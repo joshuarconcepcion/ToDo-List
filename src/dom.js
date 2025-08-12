@@ -4,11 +4,13 @@ import { format } from 'date-fns';
 const sidebarLogoContainer = document.querySelector('.sidebar-logo-container');
 const dateDisplay = document.getElementById('date-display');
 
-export function renderUI() {
+export function renderUI(defaultInbox, container) {
     const sidebarLogo = new Image();
     sidebarLogo.classList.add('sidebar-logo');
     sidebarLogo.src = todayLogo;
     sidebarLogoContainer.appendChild(sidebarLogo);
+
+    renderDefaultProject(defaultInbox, container)
 
     const today = new Date();
     const formattedDate = format(today, 'PPPP');
@@ -33,6 +35,20 @@ export function renderProjectInput(container) {
     return projectInput;
 }
 
+const renderDefaultProject = (project, container) => {
+    const projectContainer = document.createElement('div');
+    projectContainer.classList.add('project-container');
+    
+    const projectBtn = document.createElement('button');
+    projectBtn.classList.add('default-project-btn');
+    projectBtn.textContent = project.name;
+
+    projectBtn.dataset.projectID = project.id;
+
+    container.appendChild(projectContainer);
+    projectContainer.appendChild(projectBtn);
+}
+
 export function renderSingleProject(project, container) {
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('project-container');
@@ -40,6 +56,8 @@ export function renderSingleProject(project, container) {
     const projectBtn = document.createElement('button');
     projectBtn.classList.add('project-btn');
     projectBtn.textContent = project.name;
+
+    projectBtn.dataset.projectID = project.id;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete-project-btn');
@@ -61,7 +79,7 @@ export function renderTodoInput(container) {
     todoDateInput.type = 'date';
     todoDateInput.classList.add('todo-date-input');
     todoDateInput.valueAsDate = new Date();
-    todoTitleInput.style.display = 'block';
+    todoDateInput.style.display = 'block';
 
     container.appendChild(todoTitleInput);
     container.appendChild(todoDateInput);
