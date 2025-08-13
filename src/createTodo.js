@@ -4,7 +4,7 @@ import { addTodoToProject } from "./projectStorage";
 
 const todoList = document.querySelector('.todo-list')
 
-export function createTodo(currProject, projects) {
+export function createTodo(currProjectID, projects) {
     const todoItemContainer = document.createElement('div');
     todoItemContainer.classList.add('todo-item-container');
     todoList.append(todoItemContainer);
@@ -23,8 +23,8 @@ export function createTodo(currProject, projects) {
 
         const todoObject = new Todo(todoTitle, todoDate);
 
-        addTodoToProject(todoObject, currProject, projects);
-        renderSingleTodo(todoObject, todoList);
+        addTodoToProject(todoObject, currProjectID, projects);
+        renderSingleTodo(todoObject, todoList, projects);
 
         todoInput.title.value = '';
         todoInput.date.value = '';

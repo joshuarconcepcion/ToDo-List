@@ -1,5 +1,6 @@
 import todayLogo from './media/images/todayLogo3.png';
 import { format } from 'date-fns';
+import { loadTodos, saveProjects } from './projectStorage';
 
 const sidebarLogoContainer = document.querySelector('.sidebar-logo-container');
 const dateDisplay = document.getElementById('date-display');
@@ -82,19 +83,22 @@ export function renderTodoInput(container) {
     }
 }
 
-export function renderSingleTodo(todo, container) {
+export function renderSingleTodo(todo, container, projects) {
     const todoCheckbox = document.createElement('input');
     todoCheckbox.type = 'checkbox';
     todoCheckbox.classList.add('todo-checkbox');
+    todoCheckbox.checked = !!todo.completed;
     todoCheckbox.style.display = 'block';
 
     todoCheckbox.addEventListener('change', () => {
         todo.toggleComplete();
+        saveProjects(projects);
         //console.log('Checkbox toggled');
     })
 
     const todoItemContainer = document.createElement('div');
     todoItemContainer.classList.add('todo-item-container');
+    todoItemContainer.dataset.todoID = todo.id;
 
     const todoBtn = document.createElement('button');
     todoBtn.classList.add('todo-btn');
@@ -121,3 +125,10 @@ export function renderSingleTodo(todo, container) {
     container.appendChild(todoItemContainer);
 }
 
+export function renderTodoList(projectID, projects, container) {
+    container.innerHTML = '';
+    let todos = loadTodos(projectID, projects);
+    todos.forEach(todo => {
+        renderSingleTodo(todo, container, projects);
+    });
+}
