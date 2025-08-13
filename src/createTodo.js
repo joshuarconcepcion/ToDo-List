@@ -24,7 +24,7 @@ export function createTodo(currProjectID, projects) {
         const todoObject = new Todo(todoTitle, todoDate);
 
         addTodoToProject(todoObject, currProjectID, projects);
-        renderSingleTodo(todoObject, todoList, projects);
+        renderSingleTodo(todoObject, todoList, projects, currProjectID);
 
         todoInput.title.value = '';
         todoInput.date.value = '';

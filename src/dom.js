@@ -83,7 +83,7 @@ export function renderTodoInput(container) {
     }
 }
 
-export function renderSingleTodo(todo, container, projects) {
+export function renderSingleTodo(todo, container, projects, projectID) {
     const todoCheckbox = document.createElement('input');
     todoCheckbox.type = 'checkbox';
     todoCheckbox.classList.add('todo-checkbox');
@@ -91,10 +91,13 @@ export function renderSingleTodo(todo, container, projects) {
     todoCheckbox.style.display = 'block';
 
     todoCheckbox.addEventListener('change', () => {
-        todo.toggleComplete();
+        const project = projects.find(p => String(p.id) === String(projectID));
+
+        const storedTodo = project.todos.find(t => String(t.id) === String(todo.id));
+
+        storedTodo.completed = todoCheckbox.checked;
         saveProjects(projects);
-        //console.log('Checkbox toggled');
-    })
+    });
 
     const todoItemContainer = document.createElement('div');
     todoItemContainer.classList.add('todo-item-container');
@@ -129,6 +132,6 @@ export function renderTodoList(projectID, projects, container) {
     container.innerHTML = '';
     let todos = loadTodos(projectID, projects);
     todos.forEach(todo => {
-        renderSingleTodo(todo, container, projects);
+        renderSingleTodo(todo, container, projects, projectID);
     });
 }
