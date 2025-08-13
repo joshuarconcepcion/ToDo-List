@@ -11,17 +11,18 @@ const addTodoBtn = document.getElementById('add-todo-btn');
 let projects = loadProjects();
 
 
-  const defaultInbox = new Project('Inbox');
-  if (projects.length === 0) {
+if (projects.length === 0) {
+    const defaultInbox = new Project('Inbox');
     projects.push(defaultInbox);
     saveProjects(projects);
-  }
+}
 
 
-let currProject = defaultInbox.id;
+let currProject = projects[0].id;
+console.log('Current project :', currProject);
 
 document.querySelector('.project-list').addEventListener('click', (e) => {
-    if (e.target.classList.contains('project-btn') || e.target.classList.contains('default-project-btn')) {
+    if (e.target.classList.contains('project-btn') || e.target.classList.contains('default-project')) {
         const projectID = e.target.dataset.projectID;
         if (projectID) {
             currProject = projectID;
@@ -30,7 +31,7 @@ document.querySelector('.project-list').addEventListener('click', (e) => {
     }
 });
 
-renderUI(defaultInbox, projectList);
+renderUI(projectList);
 renderProjectList(projects, projectList);
 
 addProjectBtn.addEventListener('click', () => {

@@ -10,8 +10,6 @@ export function renderUI(defaultInbox, container) {
     sidebarLogo.src = todayLogo;
     sidebarLogoContainer.appendChild(sidebarLogo);
 
-    renderDefaultProject(defaultInbox, container)
-
     const today = new Date();
     const formattedDate = format(today, 'PPPP');
     dateDisplay.textContent = formattedDate;
@@ -35,20 +33,6 @@ export function renderProjectInput(container) {
     return projectInput;
 }
 
-const renderDefaultProject = (project, container) => {
-    const projectContainer = document.createElement('div');
-    projectContainer.classList.add('project-container');
-    
-    const projectBtn = document.createElement('button');
-    projectBtn.classList.add('default-project-btn');
-    projectBtn.textContent = project.name;
-
-    projectBtn.dataset.projectID = project.id;
-
-    container.appendChild(projectContainer);
-    projectContainer.appendChild(projectBtn);
-}
-
 export function renderSingleProject(project, container) {
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('project-container');
@@ -59,13 +43,20 @@ export function renderSingleProject(project, container) {
 
     projectBtn.dataset.projectID = project.id;
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-project-btn');
-    deleteBtn.textContent = 'Delete';
+    if (project.name === 'Inbox') {
+        projectBtn.classList.remove('project-btn');
+        projectBtn.classList.add('default-project');
+    }
 
     container.appendChild(projectContainer);
     projectContainer.appendChild(projectBtn);
-    projectContainer.appendChild(deleteBtn);
+
+    if (project.name !== 'Inbox') {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-project-btn');
+        deleteBtn.textContent = 'Delete';
+        projectContainer.appendChild(deleteBtn);
+    }
 }
 
 export function renderTodoInput(container) {
